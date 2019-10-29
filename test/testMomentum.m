@@ -16,7 +16,7 @@ ylim([min(Y), max(Y)]);
 
 hold on;
 
-gamma = 0.7;
+gamma = 0.3;
 lambda = 0.7;
 eps = 0.01;
 a = 0.1;
@@ -50,6 +50,11 @@ for k_ = 1:T
     else
         mov(:, :, 1, k_) = rgb2ind(frame.cdata, map, 'nodither');
     end
+end
+
+% resize gif timelength
+if k_ < T
+    mov = mov(:, :, 1, 1:k_);
 end
 
 fname = "Momentum.gif";
