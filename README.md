@@ -6,7 +6,7 @@ Visualization of AI Optimizers.
 
 Our supporting optimizers.
 
-`GD` to `NAdam` is are referenced ([arxiv 1609.04747 - Understanding Gradient Descent Algorithm](https://arxiv.org/abs/1908.03265))
+From `GD` to `NAdam` are referenced ([arxiv 1609.04747 - Understanding Gradient Descent Algorithm](https://arxiv.org/abs/1908.03265))
 
 - GD (Gradient Descent)
 - SGD (Stochastic Gradient Descent)
