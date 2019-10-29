@@ -4,8 +4,6 @@ function [fin, x] = SGD(f, x, a, eps, lambda)
     
     persistent grad;
     
-    disp(grad);
-    
     if isempty(grad) || lambda < rand(1)
         grad = (f(x + a) - f(x - a)) / (2*a);
     end
