@@ -17,8 +17,8 @@ hold on;
 lambda = 0.3;
 eps = 0.01;
 a = 0.1;
-x = 2;
-y = 3;
+x = rand(1)*20 - 10;
+y = rand(1)*20 - 10;
 k = 0;
 
 for k_ = 1:100
