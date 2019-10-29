@@ -19,4 +19,4 @@ Our supporting optimizers.
 - NAdam
 - RAdam ([arxiv 1908.03265 - On the Variance of the Adaptive Learning Rate and Beyond](https://arxiv.org/abs/1908.03265))
 
-If you want any more optimizers to add here, please write on `issue` tab.
+If you want any more optimizers to add here, please write on [issues](/Kitsunetic/Optimizer-Visualization/issues) tab.
