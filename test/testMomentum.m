@@ -34,11 +34,13 @@ mov = zeros(f_height, f_width+10, 1, T, 'uint8');
 for k_ = 1:T
     fprintf("%d: x=%f, y=%f\n", k, x, f(x));
     
-    [fin, k, x] = Momentum(f, x, a, k, eps, lambda, gamma);
+    [fin, k, xn] = Momentum(f, x, a, k, eps, lambda, gamma);
     if fin
         break
     end
     
+    plot([x, xn], [f(x), f(xn)], 'r-');
+    x = xn;
     set(xptr, 'XData', x, 'YData', f(x));
     drawnow;
     
@@ -50,6 +52,6 @@ for k_ = 1:T
     end
 end
 
-fname = "Momentum.gif"
+fname = "Momentum.gif";
 fprintf("Write animation to '%s'\n", fname);
 imwrite(mov, map, fname, 'DelayTime', 0, 'LoopCount', inf);
