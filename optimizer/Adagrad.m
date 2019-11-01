@@ -13,12 +13,12 @@ function [fin, k, x] = Adagrad(f, x, a, k, eps, lambda)
     
     persistent G;
     
-    if k == 0
-        G = [x.^2];
-    else
-        G(k+1) = x.^2;
-    end
     grad = (f(x+a) - f(x-a)) / (2*a);
+    if k == 0
+        G = [grad.^2];
+    else
+        G(k+1) = grad.^2;
+    end
     
     fin = abs(grad) <= eps;
     x = x - a/sqrt(sum(G)+eps) * grad;

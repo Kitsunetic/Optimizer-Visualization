@@ -7,8 +7,7 @@ close all;
 
 addpath('../optimizer');
 
-%f = @(x) x.^2 + x + 1;
-f = @(x) (x.^4 - 100*x.^2 - 2304)/1000;
+f = @(x) x.^2 + x + 1;
 X = -10:0.05:10;
 Y = f(X);
 plot(X, Y);
@@ -18,7 +17,7 @@ ylim([min(Y), max(Y)]);
 hold on;
 
 lambda = 0.7;
-eps = 0.01;
+eps = 1e-8;
 a = 0.1;
 x = rand(1)*20 - 10;
 k = 0;
