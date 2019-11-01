@@ -1,5 +1,5 @@
 %%
-% Plot 2D SGD example
+% Plot 2D Momentum Optimizer example
 %%
 
 clear all;
@@ -7,7 +7,8 @@ close all;
 
 addpath('../optimizer');
 
-f = @(x) x.^2 + x + 1;
+%f = @(x) x.^2 + x + 1;
+f = @(x) (x.^4 - 100*x.^2 - 2304)/1000;
 X = -10:0.05:10;
 Y = f(X);
 plot(X, Y);
@@ -24,12 +25,12 @@ x = rand(1)*20 - 10;
 k = 0;
 
 xptr = plot(x, f(x), 'ro');
-T = 100;
+T = 500;
 
 f_pos = get(gcf, 'Position');
 f_width = f_pos(3);
 f_height = f_pos(4);
-mov = zeros(f_height, f_width+10, 1, T, 'uint8');
+mov = zeros(f_height, f_width, 1, T, 'uint8');
 
 for k_ = 1:T
     fprintf("%d: x=%f, y=%f\n", k, x, f(x));
