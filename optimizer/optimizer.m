@@ -22,7 +22,7 @@ function varargout = optimizer(varargin)
 
 % Edit the above text to modify the response to help optimizer
 
-% Last Modified by GUIDE v2.5 03-Nov-2019 00:23:32
+% Last Modified by GUIDE v2.5 03-Nov-2019 00:34:16
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -235,6 +235,46 @@ switch get(handles.ch_Rmsprop,'Value')
         close(S.fh)
         quit
 end
+switch get(handles.ch_RAdam,'value')
+    case 0      % RAdam그래프 출력
+      
+    case 1   
+      
+    otherwise  % This should never happen!
+        disp('Matlab entered the twilight zone, aborting.')
+        close(handles.optimizer)
+        quit
+end
+switch get(handles.ch_Adamax,'value')
+    case 0     
+      
+    case 1    
+
+    otherwise  % This should never happen!
+        disp('Matlab entered the twilight zone, aborting.')
+        close(handles.optimizer)
+        quit
+end
+switch get(handles.ch_NAdam,'value')
+    case 0     
+      
+    case 1    
+      
+    otherwise  % This should never happen!
+        disp('Matlab entered the twilight zone, aborting.')
+        close(handles.optimizer)
+        quit
+end
+switch get(handles.ch_Adam,'value')
+    case 0     
+       
+    case 1   
+        
+    otherwise  % This should never happen!
+        disp('Matlab entered the twilight zone, aborting.')
+        close(handles.optimizer)
+        quit
+end
 guidata(hObject, handles);
 
 
@@ -268,6 +308,7 @@ function ch_NAdam_Callback(hObject, eventdata, handles)
 function ch_RAdam_Callback(hObject, eventdata, handles)
 
 function ch_Adamax_Callback(hObject, eventdata, handles)
+function ch_Adam_Callback(hObject, eventdata, handles)
 
 %check box end
 
@@ -369,6 +410,16 @@ switch get(handles.ch_NAdam,'value')
         set(handles.NAdam_uipanel,'visible','off')
     case 1    % The text is invisible, make it visible.
         set(handles.NAdam_uipanel,'visible','on')
+    otherwise  % This should never happen!
+        disp('Matlab entered the twilight zone, aborting.')
+        close(handles.optimizer)
+        quit
+end
+switch get(handles.ch_Adam,'value')
+    case 0     % The text is visible, make it invisible.
+        set(handles.Adam_uipanel,'visible','off')
+    case 1    % The text is invisible, make it visible.
+        set(handles.Adam_uipanel,'visible','on')
     otherwise  % This should never happen!
         disp('Matlab entered the twilight zone, aborting.')
         close(handles.optimizer)
@@ -637,6 +688,52 @@ end
 function Adamax_beta2_Callback(hObject, eventdata, handles)
 
 function Adamax_beta2_CreateFcn(hObject, eventdata, handles)
+
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in ch_Adam.
+
+
+%Adam parameter 
+
+function Adam_a_Callback(hObject, eventdata, handles)
+
+
+% --- Executes during object creation, after setting all properties.
+function Adam_a_CreateFcn(hObject, eventdata, handles)
+
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function Adam_eps_Callback(hObject, eventdata, handles)
+
+function Adam_eps_CreateFcn(hObject, eventdata, handles)
+
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function Adam_beta1_Callback(hObject, eventdata, handles)
+
+function Adam_beta1_CreateFcn(hObject, eventdata, handles)
+
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function Adam_beta2_Callback(hObject, eventdata, handles)
+
+function Adam_beta2_CreateFcn(hObject, eventdata, handles)
 
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
