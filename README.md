@@ -19,4 +19,4 @@ From `GD` to `NAdam` are referenced ([arxiv 1609.04747 - Understanding Gradient 
 - NAdam
 - RAdam ([arxiv 1908.03265 - On the Variance of the Adaptive Learning Rate and Beyond](https://arxiv.org/abs/1908.03265))
 
-If you want any more optimizers to add here, please write on [issues](/Kitsunetic/Optimizer-Visualization/issues) tab.
+If you want any more optimizers to add here, please write on [issues](https://github.com/Kitsunetic/Optimizer-Visualization/issues) tab.

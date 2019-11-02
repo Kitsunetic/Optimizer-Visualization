@@ -7,20 +7,21 @@ close all;
 
 addpath('../optimizer');
 
-f = @(x) x.^2 + 2*x + 1;
-X = -2:0.01:2;
+f = @(x) x.^2 + x + 1;
+X = -10:0.05:10;
 Y = f(X);
 plot(X, Y);
-axis([-2, 2, 0, 10]);
+xlim([-10, 10]);
+ylim([min(Y), max(Y)]);
 hold on;
 
 lambda = 0.3;
-eps = 0.01;
+eps = 1e-8;
 a = 0.1;
-x = -2;
+x = 9;
 k = 0;
 
-for k_ = 1:100
+for k_ = 1:500
     fprintf("%d: x = %f, y = %f\n", k, x, f(x));
     
     [fin, k, xn] = GD(f, x, a, k, eps);
