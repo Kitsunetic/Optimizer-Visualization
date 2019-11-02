@@ -1,4 +1,4 @@
-function [fin, x] = Adagrad(f, x, a, eps, lambda)
+function [fin, x] = Adagrad(f, x, a, eps)
     % Adagrad(Adaptive gradient?)
     % Momentum과는 다름 방향으로, 학습 속도(alpha)를 튜닝하기 시작한다.
     % 하지만, G가 단순하게 계속 커지기만 하기 때문에
@@ -7,7 +7,6 @@ function [fin, x] = Adagrad(f, x, a, eps, lambda)
     % x - variable(theta in paper)
     % a - step size
     % eps - epsilon
-    % lambda - percent parameter
     
     persistent k;
     persistent G;

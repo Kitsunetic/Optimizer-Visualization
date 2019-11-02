@@ -9,7 +9,7 @@ function [fin, x] = RMSProp(f, x, a, eps)
     persistent G;
     persistent H;
     
-    gamma = 0.9
+    gamma = 0.9;
     
     grad = (f(x+a) - f(x-a)) / (2*a);
     if isempty(k)

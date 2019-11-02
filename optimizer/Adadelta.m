@@ -1,11 +1,10 @@
-function [fin, k, x] = Adadelta(f, x, a, k, eps, gamma)
+function [fin, x] = Adadelta(f, x, a, eps, gamma)
     % Adadelta is an extension of Adagrad that seeks to reduce its aggressive, monotonically decreasing
     % learning rate. Instead of accumulating all past squared gradients, Adadelta restricts the window of
     % accumulated past gradients to some fixed size w.
     % f - function
     % x - variable(theta in paper)
     % a - step size
-    % k - current index
     % eps - epsilon
     
     persistent k;
