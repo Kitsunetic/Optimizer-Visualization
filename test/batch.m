@@ -51,18 +51,34 @@ y = ones(1, num_optimizers) .* y;
 z = ones(1, num_optimizers) .* f(x, y);
 k = 1;
 k_ = 1;
-colors = rand(3, num_optimizers);
+%colors = rand(3, num_optimizers);
+colors = [
+    0, 0, 0;
+    0, 0, 1;
+    0, 1, 0;
+    0, 1, 1;
+    1, 0, 0;
+    1, 0, 1;
+    1, 1, 0;
+    1, 1, 1;
+    1, 0.5, 0.5;
+    0.5, 1, 0.5;
+    0.5, 0.5, 1
+]';
 xn = zeros(1, num_optimizers);
 yn = zeros(1, num_optimizers);
 zn = zeros(1, num_optimizers);
+converge = zeros(1, num_optimizers);
 
 %% draw cursor
 for i = 1:num_optimizers
-    xptr(i) = plot3(x, y, z, 'color', colors(:, i), 'marker', 'o');
-    set(xptr(i), 'MarkerFaceColor', colors(:, i));
+    xptr(i) = plot3(x, y, z, 'color', colors(:, i), 'marker', '.', 'MarkerSize', 20);
+    %set(xptr(i), 'Color', colors(:, i));
+    %fprintf("%d: color: %f\n", i, colors(:, i));
 end
 
-%% !! press any key to start !! 
+%% !! press any key to start !!
+fprintf("Press any key to start ...\n\n");
 pause;
 
 %% iterate epoch
@@ -71,6 +87,7 @@ for epoch = 1:num_epoch
         for i = 1:num_optimizers
             fprintf("%d %s | x=%f, y=%f, y=%f\n", epoch, optimizer_names(i), x(i), y(i), z(i));
         end
+        fprintf("\n");
     end
     
     %% calculate next step
@@ -104,9 +121,16 @@ for epoch = 1:num_epoch
     
     zn = f(xn, yn);
     
+    % check convergence
+    for i = 1:num_optimizers
+        if converge(i) == 0 && zn(i) < -10
+            converge(i) = epoch;
+        end
+    end
+    
     %% plot
     for i = 1:num_optimizers
-        plot3([x(i), xn(i)], [y(i), yn(i)], [z(i), zn(i)], 'color', colors(:, i));
+        plot3([x(i), xn(i)], [y(i), yn(i)], [z(i), zn(i)], 'color', colors(:, i), 'LineWidth', 3);
         set(xptr(i), 'XData', xn, 'YData', yn, 'ZData', zn);
     end
     x = xn; y = yn; z = zn;
@@ -124,6 +148,18 @@ for epoch = 1:num_epoch
     k = k + 1;
 end
 
+% show benchmark
+converge(converge == 0) = -1;
+fprintf("\n");
+fprintf("Benchmark\n");
+fprintf("==================================================\n");
+for i = 1:num_optimizers
+    fprintf("%02d | % 10s: %d\n", i, optimizer_names(i), converge(i));
+end
+fprintf("==================================================\n");
+fprintf("\n")
+
+% save animation as *.gif file
 fname = "batch.gif";
 fprintf("Write animation to '%s'\n", fname);
 imwrite(mov, map, fname, 'DelayTime', 0, 'LoopCount', inf);
