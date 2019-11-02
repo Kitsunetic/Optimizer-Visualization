@@ -29,7 +29,7 @@ function [fin, k, x] = NAdam(f, x, a, k, eps, beta1, beta2)
     m_hat = m / (1-beta1_);
     v_hat = v / (1-beta2_);
     
-    fin = abs(grad) <= eps;
+    fin = abs(grad) <= 1e-3;
     x = x - a / (sqrt(v_hat) + eps) * (beta1*m_hat + (1-beta1)*grad/(1-beta1_));
     k = k + 1;
 end

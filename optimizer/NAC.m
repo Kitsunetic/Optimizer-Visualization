@@ -20,7 +20,7 @@ function [fin, k, x] = NAC(f, x, a, k, eps, lambda, gamma)
         grad = gg + (1-gamma)*(f(x-gg + a) - f(x-gg - a)) / (2*a);
     end
     
-    fin = abs(grad) <= eps;
+    fin = abs(grad) <= 1e-3;
     x = x - a * grad;
     k = k + 1;
 end

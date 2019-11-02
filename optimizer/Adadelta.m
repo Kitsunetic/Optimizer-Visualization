@@ -21,7 +21,7 @@ function [fin, k, x] = Adadelta(f, x, a, k, eps, gamma)
         H = gamma*H + (1-gamma)*(a.^2/(G+eps) * grad.^2);
     end
     
-    fin = abs(grad) <= eps;
+    fin = abs(grad) <= 1e-3;
     x = x - sqrt(H+eps)/sqrt(G+eps)*grad;
     k = k + 1;
 end

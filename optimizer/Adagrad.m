@@ -20,7 +20,7 @@ function [fin, k, x] = Adagrad(f, x, a, k, eps, lambda)
         G(k+1) = grad.^2;
     end
     
-    fin = abs(grad) <= eps;
+    fin = abs(grad) <= 1e-3;
     x = x - a/sqrt(sum(G)+eps) * grad;
     k = k + 1;
 end

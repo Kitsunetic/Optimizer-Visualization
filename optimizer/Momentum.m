@@ -19,7 +19,7 @@ function [fin, k, x] = Momentum(f, x, a, k, eps, lambda, gamma)
         grad = gamma*grad + (1-gamma)*(f(x + a) - f(x - a)) / (2*a);
     end
     
-    fin = abs(grad) <= eps;
+    fin = abs(grad) <= 1e-3;
     x = x - a * grad;
     k = k + 1;
 end

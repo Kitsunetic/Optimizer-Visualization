@@ -16,7 +16,7 @@ function [fin, k, x1, x2] = SGD3(f, x1, x2, a, k, eps, lambda)
         grad = rssq([grad1, grad2]);
     end
     
-    fin = abs(grad) <= eps;
+    fin = abs(grad) <= 1e-3;
     x1 = x1 - a*grad1;
     x2 = x2 - a*grad2;
     k = k + 1;

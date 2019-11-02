@@ -31,7 +31,7 @@ function [fin, k, x] = AdaMax(f, x, a, k, eps, beta1, beta2)
     m_hat = m / (1-beta1_);
     v_hat = v / (1-beta2_);
     
-    fin = abs(grad) <= eps;
+    fin = abs(grad) <= 1e-3;
     x = x - a / u * m_hat;
     k = k + 1;
 end

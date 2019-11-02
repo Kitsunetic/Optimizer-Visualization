@@ -21,7 +21,7 @@ function [fin, k, x] = RMSProp(f, x, a, k, eps)
         H = gamma*H + (1-gamma)*(a.^2/(G+eps) * grad.^2);
     end
     
-    fin = abs(grad) <= eps;
+    fin = abs(grad) <= 1e-3;
     x = x - a/sqrt(G+eps)*grad;
     k = k + 1;
 end
