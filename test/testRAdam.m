@@ -1,5 +1,5 @@
 %%
-% Plot 2D NAdam Optimizer example
+% Plot 2D RAdam Optimizer example
 %%
 
 clear all;
