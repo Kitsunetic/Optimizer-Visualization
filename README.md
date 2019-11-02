@@ -2,6 +2,8 @@
 
 Visualization of AI Optimizers.
 
+![batch_test](./test/batch.gif)
+
 ## Optimizers
 
 Our supporting optimizers.
