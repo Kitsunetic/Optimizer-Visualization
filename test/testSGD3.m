@@ -11,7 +11,8 @@ f = @(x, y) 4*x.^2 - 4*x.*y + 2*y.^2;
 t = linspace(-10, 10, 100)
 [X, Y] = meshgrid(t, t);
 Z = f(X, Y);
-surf(X, Y, Z);
+%surf(X, Y, Z);
+contour(X, Y, Z);
 hold on;
 
 lambda = 0.3;

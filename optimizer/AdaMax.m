@@ -1,5 +1,5 @@
-function [fin, k, x] = Adam(f, x, a, k, eps, beta1, beta2)
-    % Adam Optimizer
+function [fin, k, x] = AdaMax(f, x, a, k, eps, beta1, beta2)
+    % AdaMax Optimizer
     % f - function
     % x - variable(theta in paper)
     % a - step size
@@ -17,11 +17,13 @@ function [fin, k, x] = Adam(f, x, a, k, eps, beta1, beta2)
     if k == 0
         m = grad;
         v = grad.^2;
+        u = abs(grad);
         beta1_ = beta1;
         beta2_ = beta2;
     else
         m = beta1*m + (1-beta1)*grad;
-        v = beta2*v + (1-beta2)*grad.^2;
+        u = max(beta2*v, abs(grad));
+        v = beta2*v + (1-beta2)*abs(grad).^2;
         beta1_ = beta1_ * beta1;
         beta2_ = beta2_ * beta2;
     end
@@ -30,6 +32,6 @@ function [fin, k, x] = Adam(f, x, a, k, eps, beta1, beta2)
     v_hat = v / (1-beta2_);
     
     fin = abs(grad) <= eps;
-    x = x - a / (sqrt(v_hat) + eps) * m_hat;
+    x = x - a / u * m_hat;
     k = k + 1;
 end
