@@ -36,7 +36,7 @@ optimizer_names = [
     "GD",
     "SGD",
     "Momentum",
-    "NAC",
+    "NAG",
     "Adagrad",
     "Adadelta",
     "RMSprop",
@@ -94,7 +94,7 @@ for epoch = 1:num_epoch
     [fin, xn(1)]  = GD      (@(l) f(l, y(1 )), x(1) , a);
     [fin, xn(2)]  = SGD     (@(l) f(l, y(2 )), x(2) , a, eps   , lambda);
     [fin, xn(3)]  = Momentum(@(l) f(l, y(3 )), x(3) , a, lambda, gamma);
-    [fin, xn(4)]  = NAC     (@(l) f(l, y(4 )), x(4) , a, lambda, gamma);
+    [fin, xn(4)]  = NAG     (@(l) f(l, y(4 )), x(4) , a, lambda, gamma);
     [fin, xn(5)]  = Adagrad (@(l) f(l, y(5 )), x(5) , a, eps);
     [fin, xn(6)]  = Adadelta(@(l) f(l, y(6 )), x(6) , a, eps   , gamma);
     [fin, xn(7)]  = RMSProp (@(l) f(l, y(7 )), x(7) , a, eps);
@@ -108,7 +108,7 @@ for epoch = 1:num_epoch
     [fin, yn(1)]  = GD      (@(l) f(x(1 ), l), y(1) , a);
     [fin, yn(2)]  = SGD     (@(l) f(x(2 ), l), y(2) , a, eps   , lambda);
     [fin, yn(3)]  = Momentum(@(l) f(x(3 ), l), y(3) , a, lambda, gamma);
-    [fin, yn(4)]  = NAC     (@(l) f(x(4 ), l), y(4) , a, lambda, gamma);
+    [fin, yn(4)]  = NAG     (@(l) f(x(4 ), l), y(4) , a, lambda, gamma);
     [fin, yn(5)]  = Adagrad (@(l) f(x(5 ), l), y(5) , a, eps);
     [fin, yn(6)]  = Adadelta(@(l) f(x(6 ), l), y(6) , a, eps   , gamma);
     [fin, yn(7)]  = RMSProp (@(l) f(x(7 ), l), y(7) , a, eps);

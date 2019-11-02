@@ -1,5 +1,5 @@
-function [fin, x] = NAC(f, x, a, lambda, gamma)
-    % NAC(Nesterov accelerated gradient)
+function [fin, x] = NAG(f, x, a, lambda, gamma)
+    % NAG(Nesterov accelerated gradient)
     % Momentum을 업데이트해서 나온 것.
     % 미래의 예측되는 위치의 gradient를 업데이트에 사용해서 이동을 가속한다.
     % f - function
