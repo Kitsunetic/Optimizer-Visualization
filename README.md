@@ -23,3 +23,13 @@ From `GD` to `NAdam` are referenced ([arxiv 1609.04747 - Understanding Gradient 
 - RAdam ([arxiv 1908.03265 - On the Variance of the Adaptive Learning Rate and Beyond](https://arxiv.org/abs/1908.03265))
 
 If you want any more optimizers to add here, please write on [issues](https://github.com/Kitsunetic/Optimizer-Visualization/issues) tab.
+
+## GUI
+
+Test on GUI is available.
+
+![GUI_example](./img/GUI_example.jpg)
+
+### How to run
+
+Open `newoptimizer.fig` with `MATLAB GUIDE` and run.
