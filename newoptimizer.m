@@ -79,6 +79,114 @@ function make_function_push_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+addpath('./utils');
+
+%% read hyper parameters
+params = zeros(11, 6);
+% alpha
+params(1 , 1) = str2num(get(handles.GD_a           , 'String'));
+params(2 , 1) = str2num(get(handles.SGD_a          , 'String'));
+params(3 , 1) = str2num(get(handles.Momentum_a     , 'String'));
+params(4 , 1) = str2num(get(handles.NAG_a          , 'String'));
+params(5 , 1) = str2num(get(handles.Adagrad_a      , 'String'));
+params(6 , 1) = str2num(get(handles.Adadelta_a     , 'String'));
+params(7 , 1) = str2num(get(handles.Rmsprop_a      , 'String'));
+params(8 , 1) = str2num(get(handles.Adam_a         , 'String'));
+params(9 , 1) = str2num(get(handles.Adamax_a       , 'String'));
+params(10, 1) = str2num(get(handles.NAdam_a        , 'String'));
+params(11, 1) = str2num(get(handles.RAdam_a        , 'String'));
+% lambda
+params(1 , 2) = 0;
+params(2 , 2) = str2num(get(handles.SGD_lambda     , 'String'));
+params(3 , 2) = str2num(get(handles.Momentum_lambda, 'String'));
+params(4 , 2) = str2num(get(handles.NAG_lambda     , 'String'));
+params(5 , 2) = 0;
+params(6 , 2) = 0;
+params(7 , 2) = 0;
+params(8 , 2) = 0;
+params(9 , 2) = 0;
+params(10, 2) = 0;
+params(11, 2) = 0;
+% gamma
+params(1 , 3) = 0;
+params(2 , 3) = 0;
+params(3 , 3) = str2num(get(handles.Momentum_gamma , 'String'));
+params(4 , 3) = str2num(get(handles.NAG_gamma      , 'String'));
+params(5 , 3) = 0;
+params(6 , 3) = str2num(get(handles.Adadelta_gamma , 'String'));
+params(7 , 3) = 0;
+params(8 , 3) = 0;
+params(9 , 3) = 0;
+params(10, 3) = 0;
+params(11, 3) = 0;
+% eps
+params(1 , 4) = 0;
+params(2 , 4) = 0;
+params(3 , 4) = 0;
+params(4 , 4) = 0;
+params(5 , 4) = str2num(get(handles.Adagrad_eps    , 'String'));
+params(6 , 4) = str2num(get(handles.Adadelta_eps   , 'String'));
+params(7 , 4) = str2num(get(handles.Rmsprop_eps    , 'String'));
+params(8 , 4) = str2num(get(handles.Adam_eps       , 'String'));
+params(9 , 4) = 0;
+params(10, 4) = str2num(get(handles.NAdam_eps      , 'String'));
+params(11, 4) = str2num(get(handles.RAdam_eps      , 'String'));
+% beta1
+params(1 , 5) = 0;
+params(2 , 5) = 0;
+params(3 , 5) = 0;
+params(4 , 5) = 0;
+params(5 , 5) = 0;
+params(6 , 5) = 0;
+params(7 , 5) = 0;
+params(8 , 5) = str2num(get(handles.Adam_beta1     , 'String'));
+params(9 , 5) = str2num(get(handles.Adamax_beta1   , 'String'));
+params(10, 5) = str2num(get(handles.NAdam_beta1    , 'String'));
+params(11, 5) = str2num(get(handles.RAdam_beta1    , 'String'));
+% beta2
+params(1 , 6) = 0;
+params(2 , 6) = 0;
+params(3 , 6) = 0;
+params(4 , 6) = 0;
+params(5 , 6) = 0;
+params(6 , 6) = 0;
+params(7 , 6) = 0;
+params(8 , 6) = str2num(get(handles.Adam_beta2     , 'String'));
+params(9 , 6) = str2num(get(handles.Adamax_beta2   , 'String'));
+params(10, 6) = str2num(get(handles.NAdam_beta2    , 'String'));
+params(11, 6) = str2num(get(handles.RAdam_beta2    , 'String'));
+
+% enabled
+enabled(1 ) = get(handles.ch_GD,         'Value');
+enabled(2 ) = get(handles.ch_SGD,        'Value');
+enabled(3 ) = get(handles.ch_Momentum,   'Value');
+enabled(4 ) = get(handles.ch_NAG,        'Value');
+enabled(5 ) = get(handles.ch_Adagrad,    'Value');
+enabled(6 ) = get(handles.ch_Adadelta,   'Value');
+enabled(7 ) = get(handles.ch_Rmsprop,    'Value');
+enabled(8 ) = get(handles.ch_Adam,       'Value');
+enabled(9 ) = get(handles.ch_Adamax,     'Value');
+enabled(10) = get(handles.ch_NAdam,      'Value');
+enabled(11) = get(handles.ch_RAdam,      'Value');
+
+f = eval(strcat('@(x,y)', get(handles.function_input, 'String'), ';'));
+axis_limit = [
+    str2num(get(handles.xmin, 'String')),
+    str2num(get(handles.xmax, 'String')),
+    str2num(get(handles.ymin, 'String')),
+    str2num(get(handles.ymax, 'String')),
+    str2num(get(handles.zmin, 'String')),
+    str2num(get(handles.zmax, 'String'))
+];
+x = ones(1, 11) .* str2num(get(handles.init_x, 'String'));
+y = ones(1, 11) .* str2num(get(handles.init_y, 'String'));
+%f = @(x, y) x.^2 + y.^3;
+%axis_limit = [-2, 2, -2, 2, -12, 12];
+%x = ones(1, 11) .* 1;
+%y = ones(1, 11) .* 1;
+
+cla reset;
+draw_batch(handles.graph, f, axis_limit, x, y, params, enabled, 200);
 
 
 function xmin_Callback(hObject, eventdata, handles)
