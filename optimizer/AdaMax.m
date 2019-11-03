@@ -14,8 +14,8 @@ function [fin, x] = AdaMax(f, x, a, beta1, beta2)
     
     grad = (f(x+a) - f(x-a)) / (2*a);
     if isempty(k)
-        m = grad;
-        v = grad.^2;
+        m = 0;
+        v = 0;
         u = abs(grad);
         beta1_ = beta1;
         beta2_ = beta2;
