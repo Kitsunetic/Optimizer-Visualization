@@ -148,130 +148,13 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-
-
-
-
 % --- Executes on button press in make_function_push.
 function make_function_push_Callback(hObject, eventdata, handles)
-a = get(handles.input22,'String');
-b = get(handles.input21,'String');
-c = get(handles.input20,'String');
-d = get(handles.input12,'String');
-e = get(handles.input11,'String');
-f = get(handles.input10,'String');
-g = get(handles.input02,'String');
-h = get(handles.input01,'String');
-i = get(handles.input00,'String');
-%h=strcat(a,e,b,f,c,g,d);
-%set(handles.fun_static,'String',h);
-switch get(handles.ch_GD,'Value')
-    case 1     % GD�׷�� ���        
-    case 0    % �׷�� ����
-        
-    otherwise  % This should never happen!
-        disp('Matlab entered the twilight zone, aborting.')
-        close(S.fh)
-        quit
-end
-switch get(handles.ch_SGD,'Value')
-    case 1     % SGD�׷�� ���        
-    case 0    % �׷�� ����
-        
-    otherwise  % This should never happen!
-        disp('Matlab entered the twilight zone, aborting.')
-        close(S.fh)
-        quit
-end
-switch get(handles.ch_Momentum,'Value')
-    case 1     % Momentum�׷�� ���        
-    case 0    % �׷�� ����
-        
-    otherwise  % This should never happen!
-        disp('Matlab entered the twilight zone, aborting.')
-        close(S.fh)
-        quit
-end
-switch get(handles.ch_NAG,'Value')
-    case 1     % NAG�׷�� ���        
-    case 0    % �׷�� ����
-        
-    otherwise  % This should never happen!
-        disp('Matlab entered the twilight zone, aborting.')
-        close(S.fh)
-        quit
-end
-switch get(handles.ch_Adagrad,'Value')
-    case 1     % Adagrad�׷�� ���        
-    case 0    % �׷�� ����
-        
-    otherwise  % This should never happen!
-        disp('Matlab entered the twilight zone, aborting.')
-        close(S.fh)
-        quit
-end
-switch get(handles.ch_Adadelta,'Value')
-    case 1     % Adadelta �׷�� ���        
-    case 0    % �׷�� ����
-        
-    otherwise  % This should never happen!
-        disp('Matlab entered the twilight zone, aborting.')
-        close(S.fh)
-        quit
-end
-switch get(handles.ch_Rmsprop,'Value')
-    case 1     % Rmsprop�׷�� ���        
-    case 0    % ���� ����
-        
-    otherwise  % This should never happen!
-        disp('Matlab entered the twilight zone, aborting.')
-        close(S.fh)
-        quit
-end
-switch get(handles.ch_RAdam,'value')
-    case 0      % RAdam�׷�� ���      
-    case 1   
-      
-    otherwise  % This should never happen!
-        disp('Matlab entered the twilight zone, aborting.')
-        close(handles.optimizer)
-        quit
-end
-switch get(handles.ch_Adamax,'value')
-    case 0     
-      
-    case 1    
-
-    otherwise  % This should never happen!
-        disp('Matlab entered the twilight zone, aborting.')
-        close(handles.optimizer)
-        quit
-end
-switch get(handles.ch_NAdam,'value')
-    case 0     
-      
-    case 1    
-      
-    otherwise  % This should never happen!
-        disp('Matlab entered the twilight zone, aborting.')
-        close(handles.optimizer)
-        quit
-end
-switch get(handles.ch_Adam,'value')
-    case 0     
-       
-    case 1   
-        
-    otherwise  % This should never happen!
-        disp('Matlab entered the twilight zone, aborting.')
-        close(handles.optimizer)
-        quit
-end
+T = linspace(-10, 10, 100);
+[X, Y] = meshgrid(T, T);
+f = @(x, y) x.^2 + y.^3;
+surf(handles.graph, X, Y, f(X, Y));
 guidata(hObject, handles);
-
-
-
-
 
 
 % --- check box start
@@ -764,40 +647,108 @@ function btn_start_batch_Callback(hObject, eventdata, handles)
 addpath('./utils');
 
 %% read hyper parameters
+params = zeros(11, 6);
 % alpha
-gd_a            = str2num(get(handles.GD_a           , 'String'));
-sgd_a           = str2num(get(handles.SGD_a          , 'String'));
-momentum_a      = str2num(get(handles.Momentum_a     , 'String'));
-nag_a           = str2num(get(handles.NAG_a          , 'String'));
-adagrad_a       = str2num(get(handles.Adagrad_a      , 'String'));
-adadelta_a      = str2num(get(handles.Adadelta_a     , 'String'));
-rmsprop_a       = str2num(get(handles.Rmsprop_a      , 'String'));
-adam_a          = str2num(get(handles.Adam_a         , 'String'));
-adamax_a        = str2num(get(handles.Adamax_a       , 'String'));
-nadam_a         = str2num(get(handles.NAdam_a        , 'String'));
-radam_a         = str2num(get(handles.RAdam_a        , 'String'));
+params(1 , 1) = str2num(get(handles.GD_a           , 'String'));
+params(2 , 1) = str2num(get(handles.SGD_a          , 'String'));
+params(3 , 1) = str2num(get(handles.Momentum_a     , 'String'));
+params(4 , 1) = str2num(get(handles.NAG_a          , 'String'));
+params(5 , 1) = str2num(get(handles.Adagrad_a      , 'String'));
+params(6 , 1) = str2num(get(handles.Adadelta_a     , 'String'));
+params(7 , 1) = str2num(get(handles.Rmsprop_a      , 'String'));
+params(8 , 1) = str2num(get(handles.Adam_a         , 'String'));
+params(9 , 1) = str2num(get(handles.Adamax_a       , 'String'));
+params(10, 1) = str2num(get(handles.NAdam_a        , 'String'));
+params(11, 1) = str2num(get(handles.RAdam_a        , 'String'));
 % lambda
-sgd_lambda      = str2num(get(handles.SGD_lambda     , 'String'));
-momentum_lambda = str2num(get(handles.Momentum_lambda, 'String'));
-nag_lambda      = str2num(get(handles.NAG_lambda     , 'String'));
+params(1 , 2) = 0;
+params(2 , 2) = str2num(get(handles.SGD_lambda     , 'String'));
+params(3 , 2) = str2num(get(handles.Momentum_lambda, 'String'));
+params(4 , 2) = str2num(get(handles.NAG_lambda     , 'String'));
+params(5 , 2) = 0;
+params(6 , 2) = 0;
+params(7 , 2) = 0;
+params(8 , 2) = 0;
+params(9 , 2) = 0;
+params(10, 2) = 0;
+params(11, 2) = 0;
 % gamma
-momentum_gamma  = str2num(get(handles.Momentum_gamma , 'String'));
-nag_gamma       = str2num(get(handles.NAG_gamma      , 'String'));
-adadelta_gamma  = str2num(get(handles.Adadelta_gamma , 'String'));
+params(1 , 3) = 0;
+params(2 , 3) = 0;
+params(3 , 3) = str2num(get(handles.Momentum_gamma , 'String'));
+params(4 , 3) = str2num(get(handles.NAG_gamma      , 'String'));
+params(5 , 3) = 0;
+params(6 , 3) = str2num(get(handles.Adadelta_gamma , 'String'));
+params(7 , 3) = 0;
+params(8 , 3) = 0;
+params(9 , 3) = 0;
+params(10, 3) = 0;
+params(11, 3) = 0;
 % eps
-adagrad_eps     = str2num(get(handles.Adagrad_eps    , 'String'));
-adadelta_eps    = str2num(get(handles.Adadelta_eps   , 'String'));
-rmsprop_eps     = str2num(get(handles.rmsprop_eps    , 'String'));
-adam_eps        = str2num(get(handles.adam_eps       , 'String'));
-nadam_eps       = str2num(get(handles.nadam_eps      , 'String'));
-radam_eps       = str2num(get(handles.radam_eps      , 'String'));
+params(1 , 4) = 0;
+params(2 , 4) = 0;
+params(3 , 4) = 0;
+params(4 , 4) = 0;
+params(5 , 4) = str2num(get(handles.Adagrad_eps    , 'String'));
+params(6 , 4) = str2num(get(handles.Adadelta_eps   , 'String'));
+params(7 , 4) = str2num(get(handles.Rmsprop_eps    , 'String'));
+params(8 , 4) = str2num(get(handles.Adam_eps       , 'String'));
+params(9 , 4) = 0;
+params(10, 4) = str2num(get(handles.NAdam_eps      , 'String'));
+params(11, 4) = str2num(get(handles.RAdam_eps      , 'String'));
 % beta1
-adam_beta1      = str2num(get(handles.adam_beta1     , 'String'));
-adamax_beta1    = str2num(get(handles.adamax_beta1   , 'String'));
-nadam_beta1     = str2num(get(handles.nadam_beta1    , 'String'));
-radam_beta1     = str2num(get(handles.radam_beta1    , 'String'));
+params(1 , 5) = 0;
+params(2 , 5) = 0;
+params(3 , 5) = 0;
+params(4 , 5) = 0;
+params(5 , 5) = 0;
+params(6 , 5) = 0;
+params(7 , 5) = 0;
+params(8 , 5) = str2num(get(handles.Adam_beta1     , 'String'));
+params(9 , 5) = str2num(get(handles.Adamax_beta1   , 'String'));
+params(10, 5) = str2num(get(handles.NAdam_beta1    , 'String'));
+params(11, 5) = str2num(get(handles.RAdam_beta1    , 'String'));
 % beta2
-adam_beta2      = str2num(get(handles.adam_beta2     , 'String'));
-adamax_beta2    = str2num(get(handles.adamax_beta2   , 'String'));
-nadam_beta2     = str2num(get(handles.nadam_beta2    , 'String'));
-radam_beta2     = str2num(get(handles.radam_beta2    , 'String'));
+params(1 , 6) = 0;
+params(2 , 6) = 0;
+params(3 , 6) = 0;
+params(4 , 6) = 0;
+params(5 , 6) = 0;
+params(6 , 6) = 0;
+params(7 , 6) = 0;
+params(8 , 6) = str2num(get(handles.Adam_beta2     , 'String'));
+params(9 , 6) = str2num(get(handles.Adamax_beta2   , 'String'));
+params(10, 6) = str2num(get(handles.NAdam_beta2    , 'String'));
+params(11, 6) = str2num(get(handles.RAdam_beta2    , 'String'));
+
+% enabled
+enabled(1 ) = get(handles.ch_GD,         'Value');
+enabled(2 ) = get(handles.ch_SGD,        'Value');
+enabled(3 ) = get(handles.ch_Momentum,   'Value');
+enabled(4 ) = get(handles.ch_NAG,        'Value');
+enabled(5 ) = get(handles.ch_Adagrad,    'Value');
+enabled(6 ) = get(handles.ch_Adadelta,   'Value');
+enabled(7 ) = get(handles.ch_Rmsprop,    'Value');
+enabled(8 ) = get(handles.ch_Adam,       'Value');
+enabled(9 ) = get(handles.ch_Adamax,     'Value');
+enabled(10) = get(handles.ch_NAdam,      'Value');
+enabled(11) = get(handles.ch_RAdam,      'Value');
+
+%f = eval('@(x,y)' + get(handles.txt_func, 'String') + ';');
+%axis_limit = [
+%    str2num(get(handles.txt_axis_xmin)),
+%    str2num(get(handles.txt_axis_xmax)),
+%    str2num(get(handles.txt_axis_ymin)),
+%    str2num(get(handles.txt_axis_ymax)),
+%    str2num(get(handles.txt_axis_zmin)),
+%    str2num(get(handles.txt_axis_zmax))
+%];
+%x = str2num(get(handles.txt_x, 'String'));
+%y = str2num(get(handles.txt_y, 'String'));
+f = @(x, y) x.^2 + y.^3;
+axis_limit = [-2, 2, -2, 2, -12, 12];
+x = ones(1, 11) .* 1;
+y = ones(1, 11) .* 1;
+
+%cla reset;
+draw_batch(handles.graph, f, axis_limit, x, y, params, enabled, 200);
