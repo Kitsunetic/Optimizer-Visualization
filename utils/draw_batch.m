@@ -1,4 +1,4 @@
-function draw_batch(graph, f, axis_limit, x, y, p, enabled, num_iteration)
+function fig = draw_batch(graph, f, axis_limit, x, y, p, enabled, num_iteration)
 %
 addpath('./optimizer');
 
@@ -23,13 +23,13 @@ colors = [
     0, 0, 0;
     0, 0, 1;
     0, 1, 0;
-    0, 1, 1;
+    0.49, 0.18, 0.56;
     1, 0, 0;
     1, 0, 1;
     1, 1, 0;
     0.5, 0.5, 0.5;
-    0.5, 0.5, 1;
-    0.7, 1, 0.3;
+    0.85, 0.33, 0.1;
+    0.5, 0.5, 0;
     0.7, 0.4, 1
 ]';
 xn = zeros(1, num_optimizers);
@@ -107,11 +107,13 @@ for k = 1:num_iteration
     % plot
     for k = 1:num_optimizers
         if enabled(k)
-            plot3(graph, [x(k), xn(k)], [y(k), yn(k)], [z(k), zn(k)], 'color', colors(:, k), 'LineWidth', 3);
-            %set(ptr(k), 'XData', xn, 'YData', yn, 'ZData', zn);
+            if axis_limit(5) <= zn(k) && zn(k) <= axis_limit(6)
+                plot3(graph, [x(k), xn(k)], [y(k), yn(k)], [z(k), zn(k)], 'color', colors(:, k), 'LineWidth', 3);
+                %set(ptr(k), 'XData', xn, 'YData', yn, 'ZData', zn);
+            end
         end
     end
     x = xn; y = yn; z = zn;
     drawnow;
 end
-hold off;
+%hold off;
