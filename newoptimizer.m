@@ -1217,9 +1217,11 @@ end
 function list_Callback(hObject, eventdata, handles)
 switch get(handles.list,'value')
     case 1     
-       set(handles.function_input,'string','x^2+y^3')
+       set(handles.function_input,'string','x.^2+y.^3')
     case 2   
-        set(handles.function_input,'string','x^2+x+1')
+        set(handles.function_input,'string','4*x.^2-4*x.*y+2*y.^2')
+    case 3
+        set(handles.function_input,'string','x.^3+y.^3')
     otherwise  % This should never happen!
         disp('Matlab entered the twilight zone, aborting.')
         close(handles.optimizer)
