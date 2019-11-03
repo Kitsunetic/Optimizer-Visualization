@@ -39,7 +39,6 @@ function [fin, x] = NAdam(f, x, a, eps, beta1, beta2)
         v_hat = sqrt(v/(1-beta2_));
         r = sqrt((row-4)/(row_inf-4) * (row-2)/(row_inf-2) * row_inf/row);
         % Update parameters with adaptive momentum
-        fprintf("r=%f, v_hat=%f, m_hat=%f\n", r, v_hat, m_hat);
         x = x - a*r*m_hat/v_hat;
     else
         % Update parameters with un-adapted momentum
