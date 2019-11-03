@@ -102,7 +102,6 @@ for k = 1:num_iteration
         [fin, xn(11)] = RAdam   (@(l) f(l, y(11)), x(11), p(11, 1), p(11, 4), p(11, 5) , p(11, 6)   );
         [fin, yn(11)] = RAdam   (@(l) f(x(11), l), y(11), p(11, 1), p(11, 4), p(11, 5) , p(11, 6)   );
     end
-    fprintf("Adamax %f, %f, %f x=%f, y=%f\n", p(9, 1), p(9,5), p(9, 6), x(9), y(9));
     zn = f(xn, yn);
     
     % plot
