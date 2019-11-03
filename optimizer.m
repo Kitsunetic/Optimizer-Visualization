@@ -22,7 +22,7 @@ function varargout = optimizer(varargin)
 
 % Edit the above text to modify the response to help optimizer
 
-% Last Modified by GUIDE v2.5 03-Nov-2019 00:34:16
+% Last Modified by GUIDE v2.5 03-Nov-2019 11:26:19
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -166,9 +166,8 @@ i = get(handles.input00,'String');
 %h=strcat(a,e,b,f,c,g,d);
 %set(handles.fun_static,'String',h);
 switch get(handles.ch_GD,'Value')
-    case 1     % GD±×·¡ÇÁ Ãâ·Â
-        
-    case 0    % ±×·¡ÇÁ ¾øÀ½
+    case 1     % GDï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½        
+    case 0    % ï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         
     otherwise  % This should never happen!
         disp('Matlab entered the twilight zone, aborting.')
@@ -176,9 +175,8 @@ switch get(handles.ch_GD,'Value')
         quit
 end
 switch get(handles.ch_SGD,'Value')
-    case 1     % SGD±×·¡ÇÁ Ãâ·Â
-        
-    case 0    % ±×·¡ÇÁ ¾øÀ½
+    case 1     % SGDï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½        
+    case 0    % ï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         
     otherwise  % This should never happen!
         disp('Matlab entered the twilight zone, aborting.')
@@ -186,9 +184,8 @@ switch get(handles.ch_SGD,'Value')
         quit
 end
 switch get(handles.ch_Momentum,'Value')
-    case 1     % Momentum±×·¡ÇÁ Ãâ·Â
-        
-    case 0    % ±×·¡ÇÁ ¾øÀ½
+    case 1     % Momentumï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½        
+    case 0    % ï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         
     otherwise  % This should never happen!
         disp('Matlab entered the twilight zone, aborting.')
@@ -196,9 +193,8 @@ switch get(handles.ch_Momentum,'Value')
         quit
 end
 switch get(handles.ch_NAG,'Value')
-    case 1     % NAG±×·¡ÇÁ Ãâ·Â
-        
-    case 0    % ±×·¡ÇÁ ¾øÀ½
+    case 1     % NAGï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½        
+    case 0    % ï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         
     otherwise  % This should never happen!
         disp('Matlab entered the twilight zone, aborting.')
@@ -206,9 +202,8 @@ switch get(handles.ch_NAG,'Value')
         quit
 end
 switch get(handles.ch_Adagrad,'Value')
-    case 1     % Adagrad±×·¡ÇÁ Ãâ·Â
-        
-    case 0    % ±×·¡ÇÁ ¾øÀ½
+    case 1     % Adagradï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½        
+    case 0    % ï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         
     otherwise  % This should never happen!
         disp('Matlab entered the twilight zone, aborting.')
@@ -216,9 +211,8 @@ switch get(handles.ch_Adagrad,'Value')
         quit
 end
 switch get(handles.ch_Adadelta,'Value')
-    case 1     % Adadelta ±×·¡ÇÁ Ãâ·Â
-        
-    case 0    % ±×·¡ÇÁ ¾øÀ½
+    case 1     % Adadelta ï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½        
+    case 0    % ï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         
     otherwise  % This should never happen!
         disp('Matlab entered the twilight zone, aborting.')
@@ -226,9 +220,8 @@ switch get(handles.ch_Adadelta,'Value')
         quit
 end
 switch get(handles.ch_Rmsprop,'Value')
-    case 1     % Rmsprop±×·¡ÇÁ Ãâ·Â
-        
-    case 0    % ±×ÆÐÇÁ ¾øÀ½
+    case 1     % Rmspropï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½        
+    case 0    % ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         
     otherwise  % This should never happen!
         disp('Matlab entered the twilight zone, aborting.')
@@ -236,8 +229,7 @@ switch get(handles.ch_Rmsprop,'Value')
         quit
 end
 switch get(handles.ch_RAdam,'value')
-    case 0      % RAdam±×·¡ÇÁ Ãâ·Â
-      
+    case 0      % RAdamï¿½×·ï¿½ï¿½ ï¿½ï¿½ï¿½      
     case 1   
       
     otherwise  % This should never happen!
@@ -738,3 +730,74 @@ function Adam_beta2_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+
+function tb_epoch_Callback(hObject, eventdata, handles)
+% hObject    handle to tb_epoch (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of tb_epoch as text
+%        str2double(get(hObject,'String')) returns contents of tb_epoch as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function tb_epoch_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to tb_epoch (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in btn_start_batch.
+function btn_start_batch_Callback(hObject, eventdata, handles)
+% hObject    handle to btn_start_batch (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+addpath('./utils');
+
+%% read hyper parameters
+% alpha
+gd_a            = str2num(get(handles.GD_a           , 'String'));
+sgd_a           = str2num(get(handles.SGD_a          , 'String'));
+momentum_a      = str2num(get(handles.Momentum_a     , 'String'));
+nag_a           = str2num(get(handles.NAG_a          , 'String'));
+adagrad_a       = str2num(get(handles.Adagrad_a      , 'String'));
+adadelta_a      = str2num(get(handles.Adadelta_a     , 'String'));
+rmsprop_a       = str2num(get(handles.Rmsprop_a      , 'String'));
+adam_a          = str2num(get(handles.Adam_a         , 'String'));
+adamax_a        = str2num(get(handles.Adamax_a       , 'String'));
+nadam_a         = str2num(get(handles.NAdam_a        , 'String'));
+radam_a         = str2num(get(handles.RAdam_a        , 'String'));
+% lambda
+sgd_lambda      = str2num(get(handles.SGD_lambda     , 'String'));
+momentum_lambda = str2num(get(handles.Momentum_lambda, 'String'));
+nag_lambda      = str2num(get(handles.NAG_lambda     , 'String'));
+% gamma
+momentum_gamma  = str2num(get(handles.Momentum_gamma , 'String'));
+nag_gamma       = str2num(get(handles.NAG_gamma      , 'String'));
+adadelta_gamma  = str2num(get(handles.Adadelta_gamma , 'String'));
+% eps
+adagrad_eps     = str2num(get(handles.Adagrad_eps    , 'String'));
+adadelta_eps    = str2num(get(handles.Adadelta_eps   , 'String'));
+rmsprop_eps     = str2num(get(handles.rmsprop_eps    , 'String'));
+adam_eps        = str2num(get(handles.adam_eps       , 'String'));
+nadam_eps       = str2num(get(handles.nadam_eps      , 'String'));
+radam_eps       = str2num(get(handles.radam_eps      , 'String'));
+% beta1
+adam_beta1      = str2num(get(handles.adam_beta1     , 'String'));
+adamax_beta1    = str2num(get(handles.adamax_beta1   , 'String'));
+nadam_beta1     = str2num(get(handles.nadam_beta1    , 'String'));
+radam_beta1     = str2num(get(handles.radam_beta1    , 'String'));
+% beta2
+adam_beta2      = str2num(get(handles.adam_beta2     , 'String'));
+adamax_beta2    = str2num(get(handles.adamax_beta2   , 'String'));
+nadam_beta2     = str2num(get(handles.nadam_beta2    , 'String'));
+radam_beta2     = str2num(get(handles.radam_beta2    , 'String'));
