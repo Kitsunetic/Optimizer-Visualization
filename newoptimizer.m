@@ -22,7 +22,7 @@ function varargout = newoptimizer(varargin)
 
 % Edit the above text to modify the response to help newoptimizer
 
-% Last Modified by GUIDE v2.5 03-Nov-2019 16:41:36
+% Last Modified by GUIDE v2.5 03-Nov-2019 18:02:55
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -80,6 +80,10 @@ function make_function_push_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 addpath('./utils');
+
+clear x;
+clear y;
+clear z;
 
 %% read hyper parameters
 params = zeros(11, 6);
@@ -186,7 +190,7 @@ y = ones(1, 11) .* str2num(get(handles.init_y, 'String'));
 %y = ones(1, 11) .* 1;
 
 cla reset;
-draw_batch(handles.graph, f, axis_limit, x, y, params, enabled, 200);
+draw_batch(handles.graph, f, axis_limit, x, y, params, enabled, 100);
 
 
 function xmin_Callback(hObject, eventdata, handles)
@@ -460,6 +464,8 @@ function ch_Adamax_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of ch_Adamax
+
+%set(handles.graph, 'toolbar', 'newoptimizer');
 
 
 % --- Executes on button press in ch_Adam.
@@ -1246,3 +1252,10 @@ function figure1_SizeChangedFcn(hObject, eventdata, handles)
 % hObject    handle to figure1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes during object creation, after setting all properties.
+function figure1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
