@@ -190,7 +190,7 @@ y = ones(1, 11) .* str2num(get(handles.init_y, 'String'));
 %y = ones(1, 11) .* 1;
 
 cla reset;
-draw_batch(handles.graph, f, axis_limit, x, y, params, enabled, 100);
+draw_batch(handles.graph, f, axis_limit, x, y, params, enabled, 150);
 
 
 function xmin_Callback(hObject, eventdata, handles)
