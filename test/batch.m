@@ -36,7 +36,7 @@ optimizer_names = [
     "GD",
     "SGD",
     "Momentum",
-    "NAC",
+    "NAG",
     "Adagrad",
     "Adadelta",
     "RMSprop",
@@ -51,18 +51,34 @@ y = ones(1, num_optimizers) .* y;
 z = ones(1, num_optimizers) .* f(x, y);
 k = 1;
 k_ = 1;
-colors = rand(3, num_optimizers);
+%colors = rand(3, num_optimizers);
+colors = [
+    0, 0, 0;
+    0, 0, 1;
+    0, 1, 0;
+    0, 1, 1;
+    1, 0, 0;
+    1, 0, 1;
+    1, 1, 0;
+    0.5, 0.5, 0.5;
+    0.5, 0.5, 1;
+    0.7, 1, 0.3;
+    0.7, 0.4, 1
+]';
 xn = zeros(1, num_optimizers);
 yn = zeros(1, num_optimizers);
 zn = zeros(1, num_optimizers);
+converge = zeros(1, num_optimizers);
 
 %% draw cursor
 for i = 1:num_optimizers
-    xptr(i) = plot3(x, y, z, 'color', colors(:, i), 'marker', 'o');
-    set(xptr(i), 'MarkerFaceColor', colors(:, i));
+    xptr(i) = plot3(x, y, z, 'color', colors(:, i), 'marker', '.', 'MarkerSize', 20);
+    %set(xptr(i), 'Color', colors(:, i));
+    %fprintf("%d: color: %f\n", i, colors(:, i));
 end
 
-%% !! press any key to start !! 
+%% !! press any key to start !!
+fprintf("Press any key to start ...\n\n");
 pause;
 
 %% iterate epoch
@@ -71,13 +87,14 @@ for epoch = 1:num_epoch
         for i = 1:num_optimizers
             fprintf("%d %s | x=%f, y=%f, y=%f\n", epoch, optimizer_names(i), x(i), y(i), z(i));
         end
+        fprintf("\n");
     end
     
     %% calculate next step
     [fin, xn(1)]  = GD      (@(l) f(l, y(1 )), x(1) , a);
     [fin, xn(2)]  = SGD     (@(l) f(l, y(2 )), x(2) , a, eps   , lambda);
     [fin, xn(3)]  = Momentum(@(l) f(l, y(3 )), x(3) , a, lambda, gamma);
-    [fin, xn(4)]  = NAC     (@(l) f(l, y(4 )), x(4) , a, lambda, gamma);
+    [fin, xn(4)]  = NAG     (@(l) f(l, y(4 )), x(4) , a, lambda, gamma);
     [fin, xn(5)]  = Adagrad (@(l) f(l, y(5 )), x(5) , a, eps);
     [fin, xn(6)]  = Adadelta(@(l) f(l, y(6 )), x(6) , a, eps   , gamma);
     [fin, xn(7)]  = RMSProp (@(l) f(l, y(7 )), x(7) , a, eps);
@@ -91,7 +108,7 @@ for epoch = 1:num_epoch
     [fin, yn(1)]  = GD      (@(l) f(x(1 ), l), y(1) , a);
     [fin, yn(2)]  = SGD     (@(l) f(x(2 ), l), y(2) , a, eps   , lambda);
     [fin, yn(3)]  = Momentum(@(l) f(x(3 ), l), y(3) , a, lambda, gamma);
-    [fin, yn(4)]  = NAC     (@(l) f(x(4 ), l), y(4) , a, lambda, gamma);
+    [fin, yn(4)]  = NAG     (@(l) f(x(4 ), l), y(4) , a, lambda, gamma);
     [fin, yn(5)]  = Adagrad (@(l) f(x(5 ), l), y(5) , a, eps);
     [fin, yn(6)]  = Adadelta(@(l) f(x(6 ), l), y(6) , a, eps   , gamma);
     [fin, yn(7)]  = RMSProp (@(l) f(x(7 ), l), y(7) , a, eps);
@@ -104,9 +121,16 @@ for epoch = 1:num_epoch
     
     zn = f(xn, yn);
     
+    % check convergence
+    for i = 1:num_optimizers
+        if converge(i) == 0 && zn(i) < -10
+            converge(i) = epoch;
+        end
+    end
+    
     %% plot
     for i = 1:num_optimizers
-        plot3([x(i), xn(i)], [y(i), yn(i)], [z(i), zn(i)], 'color', colors(:, i));
+        plot3([x(i), xn(i)], [y(i), yn(i)], [z(i), zn(i)], 'color', colors(:, i), 'LineWidth', 3);
         set(xptr(i), 'XData', xn, 'YData', yn, 'ZData', zn);
     end
     x = xn; y = yn; z = zn;
@@ -124,6 +148,18 @@ for epoch = 1:num_epoch
     k = k + 1;
 end
 
+% show benchmark
+converge(converge == 0) = -1;
+fprintf("\n");
+fprintf("Benchmark\n");
+fprintf("==================================================\n");
+for i = 1:num_optimizers
+    fprintf("%02d | % 10s: %d\n", i, optimizer_names(i), converge(i));
+end
+fprintf("==================================================\n");
+fprintf("\n")
+
+% save animation as *.gif file
 fname = "batch.gif";
 fprintf("Write animation to '%s'\n", fname);
 imwrite(mov, map, fname, 'DelayTime', 0, 'LoopCount', inf);
