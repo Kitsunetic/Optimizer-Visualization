@@ -4,17 +4,17 @@ addpath('./optimizer');
 
 %% initialize variables
 optimizer_names = [
-    "GD",
-    "SGD",
-    "Momentum",
-    "NAG",
-    "Adagrad",
-    "Adadelta",
-    "RMSprop",
-    "Adam",
-    "AdaMax",
-    "NAdam",
-    "RAdam"
+    string('GD'),
+    string('SGD'),
+    string('Momentum'),
+    string('NAG'),
+    string('Adagrad'),
+    string('Adadelta'),
+    string('RMSprop'),
+    string('Adam'),
+    string('AdaMax'),
+    string('NAdam'),
+    string('RAdam')
 ];
 num_optimizers = length(optimizer_names);
 z = f(x, y);
