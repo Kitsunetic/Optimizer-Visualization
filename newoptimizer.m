@@ -81,9 +81,12 @@ function make_function_push_Callback(hObject, eventdata, handles)
 
 addpath('./utils');
 
-clear x;
-clear y;
-clear z;
+global mainkey;
+if isempty(mainkey)
+    mainkey = 0;
+else
+    mainkey = mainkey + 1;
+end
 
 %% read hyper parameters
 params = zeros(11, 6);
@@ -190,7 +193,7 @@ y = ones(1, 11) .* str2num(get(handles.init_y, 'String'));
 %y = ones(1, 11) .* 1;
 
 cla reset;
-draw_batch(handles.graph, f, axis_limit, x, y, params, enabled, 150);
+draw_batch(handles.graph, f, axis_limit, x, y, params, enabled, 150, mainkey);
 
 
 function xmin_Callback(hObject, eventdata, handles)
