@@ -1,5 +1,16 @@
-function fig = draw_batch(graph, f, axis_limit, x, y, p, enabled, num_iteration)
-%
+function fig = draw_batch(graph, f, axis_limit, x, y, p, enabled, num_iteration, key)
+% graph - handler for being drawn graph
+% f
+% axis_limit
+% x
+% y
+% p
+% enabled
+% num_iteration - 
+% key - 
+
+global mainkey;
+
 addpath('./optimizer');
 
 %% initialize variables
