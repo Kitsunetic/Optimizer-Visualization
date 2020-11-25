@@ -1,6 +1,8 @@
+# 
+
 # Optimizer Visualization
 
-Visualization of AI Optimizers.
+Visualization of Optimizers.
 
 ![batch_test](./test/batch.gif)
 
