@@ -1,5 +1,3 @@
-# 잘 사용하셨으면 우측 위의 별을 눌러주세요
-
 # Optimizer Visualization
 
 Visualization of Optimizers.
@@ -35,3 +33,5 @@ Test on GUI is available.
 ### How to run
 
 Open `newoptimizer.fig` with `MATLAB GUIDE` and run.
+
+# 잘 사용하셨으면 우측 위의 별을 눌러주세요 !!
